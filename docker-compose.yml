@@ -1,4 +1,19 @@
 services:
+  # MySQL service
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: app
+      MYSQL_USER: app_user
+      MYSQL_PASSWORD: "${MYSQL_USER_PASSWORD}"
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+    ports:
+      - "3306:3306"
+    networks:
+      - app_network
+
   # PHP FPM service
   php-fpm:
     build:
@@ -10,6 +25,9 @@ services:
     volumes:
       - ./app:/var/www/html
       - ./infra/php-fpm/php.ini-development:/usr/local/etc/php/php.ini
+    environment:
+      MYSQL_USER_PASSWORD: "${MYSQL_USER_PASSWORD}"
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
     networks:
       - app_network
 
@@ -28,20 +46,6 @@ services:
     networks:
       - app_network
 
-  # MySQL service
-  mysql:
-    image: mysql:latest
-    container_name: mysql
-    restart: unless-stopped
-    environment:
-      MYSQL_DATABASE: app
-      MYSQL_USER: app_user
-      MYSQL_PASSWORD: "${MYSQL_USER_PASSWORD}"
-      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
-    ports:
-      - "3306:3306"
-    networks:
-      - app_network
 
 networks:
   app_network:
