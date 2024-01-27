@@ -7,8 +7,8 @@ services:
     environment:
       MYSQL_DATABASE: app
       MYSQL_USER: app_user
-      MYSQL_PASSWORD: "${MYSQL_USER_PASSWORD}"
-      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+    env_file:
+      - ./fixtures/envs
     ports:
       - "3306:3306"
     networks:
@@ -25,9 +25,8 @@ services:
     volumes:
       - ./app:/var/www/html
       - ./infra/php-fpm/php.ini-development:/usr/local/etc/php/php.ini
-    environment:
-      MYSQL_USER_PASSWORD: "${MYSQL_USER_PASSWORD}"
-      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+    env_file:
+      - ./fixtures/envs
     networks:
       - app_network
 
