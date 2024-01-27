@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Log;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    error_log('testing');
+    Log::info('This message will be logged to the Laravel log.');
+    Log::error('This error will be logged to the Laravel log.');
     return view('welcome');
 });
