@@ -2,11 +2,11 @@
 # Makefile
 
 # Specify the default target
-all: run_script
+all: build
 
 # Default run without argument
-run_script:
-	docker-compose up -d --build
+build:
+	./scripts/validate-setup.sh && docker-compose up -d --build
 
 # run containers
 up:
@@ -26,6 +26,6 @@ mysql:
 	docker exec -it mysql $< $(c)
 
 # Phony target to prevent conflicts with file named "all"
-.PHONY: all up down restart
+.PHONY: all build up down restart
 
 # end
