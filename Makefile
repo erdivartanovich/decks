@@ -16,12 +16,19 @@ up:
 down:
 	docker-compose down
 
+# restart a service
 restart:
 	docker-compose restart $< $(s)
 
+# exec php container commands, e.g make php -c="composer install"
 php:
 	docker exec -it php-fpm $< $(c)
 
+# exec nginx container commands
+nginx:
+	docker exec -it nginx $< $(c)
+
+# exec mysql container commands
 mysql:
 	docker exec -it mysql $< $(c)
 
