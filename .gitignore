@@ -1,5 +1,6 @@
 .env
 configs/nginx/
+/apps
 !*/apps/default/*
 !apps/php/laravel-example/
 !configs/nginx/default.conf
