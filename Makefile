@@ -16,21 +16,21 @@ up:
 down:
 	docker-compose down
 
-# restart a service
+# restart services, e.g `make restart name="nginx php-fpm"`
 restart:
-	docker-compose restart $< $(s)
+	docker-compose restart $< $(name)
 
-# exec php container commands, e.g make php -c="composer install"
+# exec php container commands, e.g `make php sh="composer install"`
 php:
-	docker exec -it php-fpm $< $(c)
+	./scripts/exec-phpfpm.sh $< $(sh)
 
 # exec nginx container commands
 nginx:
-	docker exec -it nginx $< $(c)
+	./scripts/exec-nginx.sh $< $(sh)
 
 # exec mysql container commands
 mysql:
-	docker exec -it mysql $< $(c)
+	./scripts/exec-mysql.sh $< $(sh)
 
 # Phony target to prevent conflicts with file named "all"
 .PHONY: all build up down restart
