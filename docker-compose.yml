@@ -4,9 +4,6 @@ services:
     image: mysql:latest
     container_name: mysql
     restart: unless-stopped
-    environment:
-      MYSQL_DATABASE: app
-      MYSQL_USER: app_user
     env_file:
       - ./.env
     ports:
@@ -23,7 +20,7 @@ services:
     restart: unless-stopped
     working_dir: /apps
     volumes:
-      - ./apps/php:/apps
+      - ./apps/php:/apps/php
       - ./configs/php-fpm/php.ini:/usr/local/etc/php/php.ini
     env_file:
       - ./.env
