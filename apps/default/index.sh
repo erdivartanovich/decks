@@ -18,7 +18,6 @@ for file_path in /etc/nginx/conf.d/*.conf; do
         server_name=$(awk '/^\s*server_name/ {gsub(/;/,"",$2); print $2}' "$file_path")
         echo "<li>"
         echo "<a href=\"http://$server_name\" target=\"_blank\">$sitename</a>"
-        echo "<a href=\"http://$server_name\" target=\"_blank\">$sitename</a>"
         echo "<button class=\"view-button\" data-config-file=\"$file_path\">View Configuration</button>"
         echo "</li>"
     fi
