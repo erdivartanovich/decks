@@ -4,6 +4,8 @@ services:
     image: mysql:latest
     container_name: mysql
     restart: unless-stopped
+    volumes:
+      - ./shared:/shared
     env_file:
       - ./.env
     ports:
@@ -21,6 +23,7 @@ services:
     working_dir: /apps
     volumes:
       - ./apps/php:/apps/php
+      - ./shared:/shared
       - ./configs/php-fpm/php.ini:/usr/local/etc/php/php.ini
     env_file:
       - ./.env
@@ -38,6 +41,7 @@ services:
       - "80:80"
     volumes:
       - ./apps:/apps
+      - ./shared:/shared
       - ./configs/nginx:/etc/nginx/conf.d
     depends_on:
       - php-fpm
