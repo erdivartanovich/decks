@@ -1,7 +1,9 @@
 .env
 configs/nginx/
 /apps
-!*/apps/default/*
+/shared
+!apps/default/*
 !apps/php/laravel-example/
 !configs/nginx/default.conf
 !configs/nginx/laravel-example.conf
+!shared/example-shared-file
