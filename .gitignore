@@ -2,7 +2,7 @@
 configs/nginx/
 /apps
 /.shared
-!apps/default/*
+!apps/default/
 !apps/php/laravel-example/
 !configs/nginx/default.conf
 !configs/nginx/laravel-example.conf
